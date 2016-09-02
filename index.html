@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Majestic Visualisation</title>
     <link rel="stylesheet" type="text/css" href="lib/javascript.fullPage.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,300,700" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" async
@@ -13,100 +14,6 @@
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
     </script>
-
-    <style>
-        /* Reset CSS */
-        body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
-        form,fieldset,input,textarea,p,blockquote,th,td {
-            padding: 0;
-            margin: 0;
-        }
-        a{
-            text-decoration:none;
-        }
-        table {
-            border-spacing: 0;
-        }
-        fieldset,img {
-            border: 0;
-        }
-        address,caption,cite,code,dfn,em,strong,th,var {
-            font-weight: normal;
-            font-style: normal;
-        }
-        strong{
-            font-weight: bold;
-        }
-        ol,ul {
-            list-style: none;
-            margin:0;
-            padding:0;
-        }
-        caption,th {
-            text-align: left;
-
-        }
-        h1,h2,h3,h4,h5,h6 {
-            font-weight: normal;
-            font-size: 100%;
-            margin:0;
-            padding:0;
-            color:#444;
-        }
-        q:before,q:after {
-            content:'';
-        }
-        abbr,acronym { border: 0;
-        }
-
-        /* Custom CSS */
-
-        body {
-            font-family: Quicksand, sans-serif;
-            color: #fff;
-            background-color: #2d526d;
-            padding: 1% !important;
-        }
-        h1 {
-            font-size: 6em;
-            color: #fff;
-        }
-
-        h2 {
-            font-size: 3em;
-            color: #fff
-        }
-
-        a {
-            color: #fff;
-            text-decoration: underline;
-        }
-
-        p {
-            font-size: 2em;
-        }
-        .content{
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-            text-align: center;
-            vertical-align: text-top;
-        }
-
-        .left, .right {
-            display: inline-block;
-        }
-
-        .left {
-            padding-right: 1%;
-            width: 48%
-        }
-
-        .right {
-            padding-left: 1%;
-            width: 40%;
-        }
-    </style>
 </head>
 
 <body>
@@ -367,20 +274,96 @@
     </div>
 
     <div class="section">
-        <div class="content">
-            <h2> Finalising a Joint Metric</h2>
+        <div class="slide">
+            <div class="content">
+                <h2> Finalising a Joint Metric</h2>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <p>
+                    If you didn't read the maths section - given a site with citation, $c_{0}$, and trust, $t_{0}$, the following equation may be used to work out it's distance from the "main sequence" of sites. $f(c)$ and $f^{-1}(c)$ depend on the citation of the given site, and can be found on the next slide.
+
+                    $$h(c, t) =min(l(c,t), r(c,t))$$
+                    $$g(c) = f(2c_{0}-c)$$
+                    $$l(c,t) = min(\ |a_{1}(c, t)|,\ |(t-g(c))|,\ |(g^{-1}(t)-c)|\ )$$
+                    $$r(c,t) = min(\ |a_{2}(c, t)|,\ |(t-f(c))|,\ |(f^{-1}(t)-c)|\ ) $$
+                    $$a_{1}(c, t) = \Bigg( \frac{t-g(c)}{|t-g(c)|} \Bigg) \Bigg( \frac{(g^{-1}(t)-c)(t-g(c))}{\sqrt{(g^{-1}(t)-c)^{2}+(t-g(c))^{2}}} \Bigg)\ +\ a\Bigg( \frac{c+g^{-1}(t)}{2}, \frac{g(c)+t}{2} \Bigg)$$
+                    $$a_{2}(c, t) = \Bigg( \frac{t-f(c)}{|t-f(c)|} \Bigg) \Bigg( \frac{(f^{-1}(t)-c)(t-f(c))}{\sqrt{(f^{-1}(t)-c)^{2}+(t-f(c))^{2}}} \Bigg)\ +\ a\Bigg( \frac{c+f^{-1}(t)}{2}, \frac{f(c)+t}{2} \Bigg)$$
+                </p>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <p>Because the inverse of the sigmoidal function uses numbers too big for computers (), we can instead model sections of the graph with simpler functions:</p>
+                <br>
+                <p>
+                    The first section (c = 1-19) of the graph can be modelled with quadratic regression.
+                    $$f(c) = 3.959819 + 2.228665c - 0.07230238c^{2}$$
+                    $$f^{-1}(c) = 15.4121 + 1.38308033*10^{-6} \sqrt{|1.52804125862547*10^{14} - 7.230238*10^{12} y|}$$
+                </p>
+
+                <p>
+                    The second section (c = 20-69) of the graph can be modelled with linear regression.
+
+                    $$f(c) = 1.000339c + 13.1116$$
+                    $$f^{-1}(t) = -0.999661(13.1116-t)$$
+                </p>
+
+                <p>
+                    The third section (c = 70-100) of the graph can be modelled with linear regression.
+
+                    $$f(c) = 0.6077348c + 39.09392$$
+                    $$f^{-1}(t) = -1.64545(39.09392-t)$$
+                </p>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <p>
+                    To calculate our joint metric, we want to take into account the distance from our site's location <b>(c,t)</b> to the curve. Let <b>dist(c,t)</b> be our function
+                    that calculates the distance from any arbitrary point to the "Main Sequence" of sites on the internet.
+                </p>
+                <br>
+                <p>
+                    Currently, the lower the distance the better, but we want to have a higher score for a shorter distance, so we take the distance from our site <b>(c,t)</b> away from
+                    the maximum possible distance - <b>dist(100,0)</b>.
+                </p>
+                <br>
+                <p>
+                    The 'best' sites will be at (100,100), so we should also take the Euclidean distance (straight-line distance) from our site <b>(c,t)</b> to (100,100) into account too.
+                    Once again, we want the difference between this and the distance from (100,0).
+                    $$ \sqrt{(0+100)^{2}+(0+100)^{2}} - \sqrt{(x+100)^{2} + (y+100)^{2}}$$
+                </p>
+                <br>
+                <p>
+                    We will call these two values distDiff and maxDistDiff respectively, and our final metric will be:
+                    <br><br>
+                    <b>
+                        distDiff * maxDistDiff
+                    </b>
+                    <br><br>
+                </p>
+            </div>
         </div>
     </div>
+
+    <div class="section">
+        <div class="content">
+          <!-- TODO: Metric Shiz-->
+          <h1> COMING SOON : TRY OUT THE METRIC!</h1>
+        </div>
+    </div>
+
 </div>
 
 <script type="text/javascript" src="lib/javascript.fullPage.js"></script>
 <script type="text/javascript">
     fullpage.initialize('#fullpage', {
-        anchors: ['1', '2', '3', '4', 'lastPage'],
+        anchors: ['1', '2', '3', '4', '5', 'lastPage'],
         menu: '#menu',
         css3:true
     });
-
 </script>
 </body>
 </html>
