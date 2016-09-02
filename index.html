@@ -11,6 +11,10 @@
             src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
 
+    <script src="metric.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/countupjs/1.7.1/countUp.min.js"></script>
+
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
     </script>
@@ -351,7 +355,13 @@
     <div class="section">
         <div class="content">
           <!-- TODO: Metric Shiz-->
-          <h1> COMING SOON : TRY OUT THE METRIC!</h1>
+            <h2>Try out the Metric</h2>
+            <br><br>
+            <h1 id="counter">0</h1>
+            Citation: <input id="citation" type="number" min="0" max="100"/>
+            &emsp;
+            Trust: <input id="trust" type="number" min="0" max="100"/>
+            <button onclick="updateCounter()">Go!</button>
         </div>
     </div>
 
@@ -364,6 +374,27 @@
         menu: '#menu',
         css3:true
     });
+
+    var counterOptions = {
+        useEasing : true,
+        useGrouping : true,
+        separator : ',',
+        decimal : '.',
+        prefix : '',
+        suffix : ''
+    };
+
+
+    var counter = new CountUp("counter", 0, 0, 0, 1.0, counterOptions);
+
+    function updateCounter() {
+        var citation = document.getElementById("citation").value;
+        var trust = document.getElementById("trust").value;
+        if(!(trust >= 0 && trust <= 100 && citation >= 0 && citation <= 100)) return; //Kinda account for edge cases.
+        var x = calcMetric(citation, trust);
+        counter.update(!x ? 0 : x);
+    }
+
 </script>
 </body>
 </html>
