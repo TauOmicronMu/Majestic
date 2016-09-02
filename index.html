@@ -6,6 +6,14 @@
     <link rel="stylesheet" type="text/css" href="lib/javascript.fullPage.css" />
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,300,700" rel="stylesheet" type="text/css">
 
+    <script type="text/javascript" async
+            src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+
     <style>
         /* Reset CSS */
         body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
@@ -62,6 +70,12 @@
             font-size: 6em;
             color: #fff;
         }
+
+        a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
         p {
             font-size: 2em;
         }
@@ -149,6 +163,21 @@
                 </div>
             </div>
         </div>
+        <div class="slide">
+            <div class="content">
+                <p>By performing <a href="https://en.wikipedia.org/wiki/Nonlinear_regression">non-linear regression</a> on the data points,</p>
+                    <p>it results in a sigmoidal function (an S-shaped curve) as follows:</p>
+                <p>$$f(c) = 18087660 - \frac{18087660}{(0.0109887c^{1.61008}+1)^{1.86131*10^{-6}}}$$</p>
+                <p> This takes any given <b>Citation Flow</b>, c, and will return the <b>Trust Flow</b> that lies on the ridge of the model.</p>
+                <br>
+                <p>As part of our metric, it will be useful to work out the shortest distance from any point on the graph to this curve.</p>
+                <br>
+                <p>But <b>HOW</b> do we do this?</p>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+
     </div>
 </div>
 
