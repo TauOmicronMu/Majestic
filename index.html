@@ -65,10 +65,16 @@
             font-family: Quicksand, sans-serif;
             color: #fff;
             background-color: #2d526d;
+            padding: 1% !important;
         }
         h1 {
             font-size: 6em;
             color: #fff;
+        }
+
+        h2 {
+            font-size: 3em;
+            color: #fff
         }
 
         a {
@@ -111,6 +117,7 @@
             <p>Tom Goodman</p>
         </div>
     </div>
+
     <div class="section">
         <div class="content">
             <b>
@@ -120,6 +127,7 @@
             <p>This is what we're going to try and answer.</p>
         </div>
     </div>
+
     <div class="section">
         <div class="slide">
             <div class="content">
@@ -176,8 +184,111 @@
             </div>
         </div>
     </div>
-    <div class="section">
 
+    <div class="section">
+        <div class="slide">
+            <div class="content">
+                <h2>Hit <b>▽</b> to skip the mathsy part & carry on to the finalisation of the metric.</h2>
+                <h2>Hit <b>▷</b> to see the maths.</h2>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <p>In order to find the distance from any arbitrary point (x, y) to the curve that we defined before, we will work</p>
+                <p>out how to find the distance from (x, y) to any given curve. Take the graph of $y=x^{3}$, for example:</p>
+                <br>
+                <img src="res/x3.png" style="background-color: #fff"/>
+                <br>
+                <p>
+                    After adding an arbitrary point, <b>A</b>$(x_{0}, y_{0})$, it is possible to draw both a vertical and horizontal line </p>
+                <p>
+                    from that point to touch the curve. These points lie at <b>B</b>$(x_{0},f(x_{0}))$ and <b>C</b>$(f^{-1}(y_{0}),y_{0})$ respectively,
+                </p>
+                <p>
+                    and subtend an angle of $90^{\circ}$.
+                </p>
+                    <br>
+                <img src="res/x3-1.png" style="background-color: #fff"/>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <p>From here, it is possible to draw a further line, between points <b>B</b> and <b>C</b>, </p>
+                <p> forming the hypotenuse of the right-angled triangle, <b>BAC</b>.</p>
+                <br>
+                <img src="res/x3-2.png" style="background-color: #fff"/>
+                <br>
+                <p>
+                    The length of the line <b>AB</b> is the difference in the y-values of the two points - $y_{0}-f(x_{0})$, and the length of the line <b>AC</b> is the difference in the x-values of the two points - $(f^{-1}(y_{0})-x_{0})$. Furthermore, the length of the hypotenuse, <b>BC</b>, can be found via Pythagoras' Theorem:
+                    $$\sqrt{(f^{-1}(y_{0})-x_{0})^{2} + (y_{0}-f(x_{0}))^{2}}$$
+                </p>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <p>
+                    The required value for the basic approximation is the height of the triangle <b>BAC</b>. Because it is right-angled, the area is equal to $\frac{|AB||AC|}{2}$. The area of any triangle is also equal to $\frac{|BC|h}{2}$. By setting these expressions equal to one another, and rearranging, the resulting expression for height is:
+                    $$ h=\frac{|AB||AC|}{|BC|} = \frac{(f^{-1}(y_{0})-x_{0})(y_{0}-f(x_{0}))}{\sqrt{(f^{-1}(y_{0})-x_{0})^{2} + (y_{0}-f(x_{0}))^{2}}}$$
+
+                    To take a greater proportion of cases into account, it is worth taking the minimum value of h, $|AB|$ and $|AC|$. For example:
+
+                    $$ h=min\Bigg(\Bigg(\frac{(f^{-1}(y_{0})-x_{0})(y_{0}-f(x_{0}))}{\sqrt{(f^{-1}(y_{0})-x_{0})^{2} + (y_{0}-f(x_{0}))^{2}}}\Bigg),\ |(f^{-1}(y_{0})-x_{0})|,\ |(y_{0}-f(x_{0}))|\Bigg)$$
+                </p>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <h2><b>▷</b>&emsp; "More maths? Yay! (｡◕‿◕｡)</h2>
+                <br>
+                <h2><b>▽</b>&emsp; "No more maths... please (╯°□°）╯︵ ┻━┻ </h2>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <p>The previously derived expression for the approximation can often wildly over or underestimate, given the right circumstance. Take for example, the following attempt to apply the current method:</p>
+                <br><br><br>
+                <img src="res/ue-1.png"/>
+                <br><br><br><br>
+                <p>
+                    In this example, the point that <b>h</b> reaches is nowhere near the closest point on the line - there is still a lot of space between them.
+                    Consider then, the midpoint of the hypotenuse - From the midpoint, it is possible to apply the same process as from the original point, and then take the sum of both results. For example:
+                </p>
+                <br>
+                <img src="res/ue-2.png"/>
+                <br>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <p>
+                    It is clear that the sum of the two calculated values ($h1 + h2$) is a significantly more
+                </p>
+                <p>
+                    accurate estimate of the distance to the curve.
+                </p>
+                <br>
+                <p>Define a function, <b>h(x,y)</b>, that returns the minimum value in the set that contains the </p>
+                <p>result of the auxiliary function, <b>a(x,y)</b>, the vertical distance and the horizontal distance:</p>
+                <p><b>$$h(x, y) = min(\ a(x,y),\ |(f^{-1}(y)-x)|,\ |(y-f(x))|)$$</b></p>
+                <p>
+                    Then define the auxiliary function, <b>a(x,y)</b>, that handles the recursive aspect of the approximation:
+                </p>
+                <p>
+                    $$a(x,y) = \Bigg( \frac{(f^{-1}(y)-x)(y-f(x))}{\sqrt{(f^{-1}(y)-x)^{2}+(y-f(x))^{2}}} \Bigg)\ +\ a\Bigg( \frac{x+f^{-1}(y)}{2}, \frac{f(x)+y}{2} \Bigg)$$
+                </p>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="content">
+            <h2> Finalising a Joint Metric</h2>
+        </div>
     </div>
 </div>
 
