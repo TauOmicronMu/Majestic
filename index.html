@@ -238,9 +238,9 @@
         </div>
         <div class="slide">
             <div class="content">
-                <h2><b>▷</b>&emsp; "More maths? Yay! (｡◕‿◕｡)</h2>
+                <h2><b>▷</b>&emsp; "More maths? Yay!" (｡◕‿◕｡)</h2>
                 <br>
-                <h2><b>▽</b>&emsp; "No more maths... please (╯°□°）╯︵ ┻━┻ </h2>
+                <h2><b>▽</b>&emsp; "No more maths... please" (╯°□°）╯︵ ┻━┻ </h2>
             </div>
         </div>
         <div class="slide">
@@ -280,7 +280,88 @@
         </div>
         <div class="slide">
             <div class="content">
-                
+                <h2><b>▷</b>&emsp; "Huzzah! Even more maths!" ٩(⁎❛ᴗ❛⁎)۶</h2>
+                <br>
+                <h2><b>▽</b>&emsp; "No more!" ┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻ </h2>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <p>By applying the original method to the following curve, it is clear that it will overestimate the distance significantly - in the same way that the previous example originally underestimated it.</p>
+                <br>
+                <img src="res/oe-1.png"/>
+                <br>
+                <p>The even more troubling flaw with the current method, is that if we continue the approximation and apply the recursive method, the overestimation will only become higher:</p>
+                <br>
+                <img src="res/oe-2.png"/>
+                <br>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <p>
+                    The answer to this, is to somehow subtract the heights that occur below the curve from the total, resulting in a close approximation once again. But how is it possible to change the sign of the height based on whether or not the point lies below the curve?
+                </p>
+                <br><br>
+                <p>
+                    If the point lies below the curve, then intuitively, $y-f(x)$ will be negative. It is now imperative to find a way to change the sign without changing the value of the distance itself. This can be achieved by multiplying the height by -1. The key to working out how to solve this issue, is to exploit the identity that anything divided by itself is equal to 1 ($\frac{a}{a}=1$). There is; however, one more piece to the puzzle.
+                </p>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <p> Currently, this will only return 1, not -1. </p> <br>
+                <p>
+                    How then, is it possible to manipulate $\frac{y-f(x)}{y-f(x)}$ in such a way that it will return -1 if $y-f(x)$ is negative?
+                </p> <br>
+                <p>
+                    The answer to this is by using the modulus function ($|x|$). Because this always returns the positive value, the result of $\frac{y-f(x)}{|y-f(x)|}$ will be 1 if $y-f(x)$ is positive, and -1 if $y-f(x)$ is negative.
+                </p> <br>
+                <p>
+                    Thus, if the product of $\frac{y-f(x)}{|y-f(x)|}$ and the distance is returned each time, the problem
+                </p>
+                <p>
+                    of overestimating is solved. This leaves the auxiliary function:
+                </p> <br>
+                <p>
+                    $$a(x, y) = \Bigg( \frac{y-f(x)}{|y-f(x)|} \Bigg) \Bigg( \frac{(f^{-1}(y)-x)(y-f(x))}{\sqrt{(f^{-1}(y)-x)^{2}+(y-f(x))^{2}}} \Bigg)\ +\ a\Bigg( \frac{x+f^{-1}(y)}{2}, \frac{f(x)+y}{2} \Bigg)$$
+                </p>
+                <p>
+                    There is, however, one final issue with the current implementation - the distance from a point below the curve to the curve itself will always be negative. It is impossible to have a negative distance in this sense, so a small alteration to the function <b>h(x,y)</b> must be made. The result of the auxiliary function must be passed to a modulus function:
+                    $$h(x, y) = min(\ |a(x, y)|,\ |(y-f(x))|,\ |(f^{-1}(y)-x)|\ ) $$
+                </p>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <h2><b>▷</b>&emsp; "Just a little more, I guess..." ¯\_(ツ)_/¯</h2>
+                <br>
+                <h2><b>▽</b>&emsp; 凸(-_-)凸 </h2>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <p>Consider the following application of the current approximation:</p>
+                <br><br>
+                <img src="res/mo-1.png"/>
+                <br><br>
+                <p>
+                    In this example, the actual value lies to the left of the point $x_{0}, y_{0}$. There is a chance that the approximation would currently create the triangles shown on the above diagram, and miss the actual solution that lies to the left. A solution to this, would be to reflect the curve, f(x), in the line $y=x_{0}$, and then use the approximation again (which is the same as drawing a triangle to the left).
+                    To reflect f(x) in $y=x_{0}$, it must first be reflected it in the y-axis, giving $f(-x)$. Then it must be translated right by $2x_{0}$, which leaves the resulting curve as $f(2x_{0}-x)$.
+                </p>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <h2> <b> Final Approximation </b> </h2>
+                <p>
+                    $$h(x, y) =min(l(x,y), r(x,y))$$
+                    $$g(x) = f(2x_{0}-x)\ where\ x_{0}\ is\ the\ x-value\ of\ the\ arbitrary\ point.$$
+                    $$l(x,y) = min(\ |a_{1}(x, y)|,\ |(y-g(x))|,\ |(g^{-1}(y)-x)|\ )$$
+                    $$r(x,y) = min(\ |a_{2}(x, y)|,\ |(y-f(x))|,\ |(f^{-1}(y)-x)|\ ) $$
+                    $$a_{1}(x, y) = \Bigg( \frac{y-g(x)}{|y-g(x)|} \Bigg) \Bigg( \frac{(g^{-1}(y)-x)(y-g(x))}{\sqrt{(g^{-1}(y)-x)^{2}+(y-g(x))^{2}}} \Bigg)\ +\ a\Bigg( \frac{x+g^{-1}(y)}{2}, \frac{g(x)+y}{2} \Bigg)$$
+                    $$a_{2}(x, y) = \Bigg( \frac{y-f(x)}{|y-f(x)|} \Bigg) \Bigg( \frac{(f^{-1}(y)-x)(y-f(x))}{\sqrt{(f^{-1}(y)-x)^{2}+(y-f(x))^{2}}} \Bigg)\ +\ a\Bigg( \frac{x+f^{-1}(y)}{2}, \frac{f(x)+y}{2} \Bigg)$$
+                </p>
             </div>
         </div>
     </div>
