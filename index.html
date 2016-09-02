@@ -53,16 +53,16 @@
 
         /* Custom CSS */
 
-        body{
+        body {
             font-family: Quicksand, sans-serif;
             color: #fff;
             background-color: #2d526d;
         }
-        h1{
+        h1 {
             font-size: 6em;
             color: #fff;
         }
-        p{
+        p {
             font-size: 2em;
         }
         .content{
@@ -70,35 +70,84 @@
             top: 50%;
             transform: translateY(-50%);
             text-align: center;
+            vertical-align: text-top;
         }
 
+        .left, .right {
+            display: inline-block;
+        }
+
+        .left {
+            padding-right: 1%;
+            width: 48%
+        }
+
+        .right {
+            padding-left: 1%;
+            width: 40%;
+        }
     </style>
 </head>
 
 <body>
 <div id="fullpage">
-    <div class="section " id="section0">
+    <div class="section">
         <div class="content">
             <h1>A Joint Citation/Trust Flow Metric</h1>
             <p>Tom Goodman</p>
         </div>
     </div>
-    <div class="section" id="section1">
-        <div class="slide" id="slide1">
-            <div class="content">
-            </div>
-        </div>
-        <div class="slide" id="slide2">
-            <div class="content">
-            </div>
-        </div>
-        <div class="slide" id="slide2">
-            <div class="content">
-            </div>
+    <div class="section">
+        <div class="content">
+            <b>
+                <p>Trust Flow and Citation Flow are Majestic's iconic descriptors for sites,</p>
+                <p>but how do you combine these into a single, descriptive metric?</p>
+            </b>
+            <p>This is what we're going to try and answer.</p>
         </div>
     </div>
-    <div class="section" id="section2">
-        <div class="content">
+    <div class="section">
+        <div class="slide">
+            <div class="content">
+                <p>
+                    <img src="res/heatmap.png">
+                    <br>
+                    <span style="font-size: 1em"> This is Majestic's heatmap of the internet.</span>
+                    <br>
+                    <span style="font-size: 0.5em">It shows <b>where</b> every site on the internet falls, based on their Trust and Citation flows.</span>
+                </p>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <p> On the y-axis is <b>Trust Flow</b>, which is how trustworthy a site is, based on it's backlinking sites.</p>
+                <br>
+                <p> On the x-axis is <b>Citation Flow</b>, which is how linked-to a site is.</p>
+                <br>
+                <p> Each coloured band contains the <b>same number</b> of sites as eachother.</p>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="content">
+                <div class="left">
+                    <img src="res/heatmap-arrows.png"/>
+                </div>
+                <div class="right">
+                    <p>
+                        If we take points at the visual "tip" of each of the coloured band sections - denoted by the arrows -
+                        it's clear that it would be possible to <b>plot a curve</b> that runs along the points.
+                    </p>
+                    <br>
+                    <p>
+                        This curve runs along the ridge of the three dimensional model:
+                        <br><br>
+                        <img src="res/ridge.png" style="width: 50%;"/>
+                        <br><br>
+                        Along the <b>z-axis</b> of this model is the total number of sites that fall at that
+                        point, which means that the sites that fall on the ridge are the "average" sites.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
