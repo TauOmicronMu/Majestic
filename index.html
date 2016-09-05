@@ -363,10 +363,9 @@
             <h2>Try out the Metric</h2>
             <br><br>
             <h1 id="counter">0</h1>
-            Citation: <input id="citation" type="number" min="0" max="100"/>
+            Citation: <input id="citation" type="number" min="0" max="100" onchange="updateCounter()"/>
             &emsp;
-            Trust: <input id="trust" type="number" min="0" max="100"/>
-            <button onclick="updateCounter()">Go!</button>
+            Trust: <input id="trust" type="number" min="0" max="100" onchange="updateCounter()"/>
         </div>
     </div>
 
