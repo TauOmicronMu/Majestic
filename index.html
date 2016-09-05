@@ -96,6 +96,8 @@
         </div>
     </div>
 
+    <!-- TODO : Add ties to main sequence of stars -->
+
     <div class="section">
         <div class="slide">
             <div class="content">
@@ -295,6 +297,9 @@
                     $$a_{1}(c, t) = \Bigg( \frac{t-g(c)}{|t-g(c)|} \Bigg) \Bigg( \frac{(g^{-1}(t)-c)(t-g(c))}{\sqrt{(g^{-1}(t)-c)^{2}+(t-g(c))^{2}}} \Bigg)\ +\ a\Bigg( \frac{c+g^{-1}(t)}{2}, \frac{g(c)+t}{2} \Bigg)$$
                     $$a_{2}(c, t) = \Bigg( \frac{t-f(c)}{|t-f(c)|} \Bigg) \Bigg( \frac{(f^{-1}(t)-c)(t-f(c))}{\sqrt{(f^{-1}(t)-c)^{2}+(t-f(c))^{2}}} \Bigg)\ +\ a\Bigg( \frac{c+f^{-1}(t)}{2}, \frac{f(c)+t}{2} \Bigg)$$
                 </p>
+                <p>
+                   (This could be condensed by passing functions, but for the purpose of explanation it's generally better to be verbose and clear)
+                </p>
             </div>
         </div>
         <div class="slide">
@@ -336,12 +341,12 @@
                 <br>
                 <p>
                     The 'best' sites will be at (100,100), so we should also take the Euclidean distance (straight-line distance) from our site <b>(c,t)</b> to (100,100) into account too.
-                    Once again, we want the difference between this and the distance from (100,0).
+                    Once again, we want the difference between this and the distance from the furthest point, (0,0).
                     $$ \sqrt{(0+100)^{2}+(0+100)^{2}} - \sqrt{(x+100)^{2} + (y+100)^{2}}$$
                 </p>
-                <br>
+                <br><br><br>
                 <p>
-                    We will call these two values distDiff and maxDistDiff respectively, and our final metric will be:
+                    We will call these two values distDiff and maxDistDiff respectivsely, and our final metric will be:
                     <br><br>
                     <b>
                         distDiff * maxDistDiff
